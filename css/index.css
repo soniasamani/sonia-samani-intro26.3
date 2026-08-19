@@ -97,3 +97,13 @@ section {
     background-color: #52796f;
     color: white;
   }
+  #Skills ul {
+    display: flex;
+    gap : 15px;
+    list-style: none;
+  }
+  #Skills li {
+    padding: 10px 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
