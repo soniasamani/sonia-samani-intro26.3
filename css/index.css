@@ -107,3 +107,87 @@ section {
     border: 1px solid black;
     border-radius: 10px;
   }
+
+  #leave-message form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;  
+}
+  
+  #leave-message {
+    max-width: 700px;
+    margin: 20px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  #leave-message input{
+  width: 100%;
+  max-width: 250px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+#leave-message textarea {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+  box-sizing: border-box;
+  min-height: 120px;
+  resize: vertical;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+#leave-message button {
+  width: 120px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #668566;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+#leave-message button:hover {
+  opacity: 0.85;
+}
+@media (max-width: 600px) {
+  #leave-message input,
+  #leave-message textarea {
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  #leave-message button {
+    width: 100%;
+    max-width: 200px;
+    padding: 12px;
+  }
+}
+
+#messages li {
+  margin-bottom: 10px;
+  padding: 12px;
+  background-color: white;
+  border-radius: 8px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  }
+#messages li a {
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 8px;
+}
+#messages li span {
+  margin-right: 10px;
+}
+#messages li button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
