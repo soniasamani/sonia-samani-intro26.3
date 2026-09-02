@@ -97,6 +97,10 @@ section {
     background-color: #52796f;
     color: white;
   }
+
+  #Skills h2 {
+    margin-left: 25px;
+  }
   #Skills ul {
     display: flex;
     gap : 15px;
@@ -116,7 +120,7 @@ section {
   
   #leave-message {
     max-width: 700px;
-    margin: 20px;
+    margin: 25px;
     padding: 10px;
     background-color: white;
     border-radius: 12px;
@@ -154,6 +158,13 @@ section {
   opacity: 0.85;
 }
 @media (max-width: 600px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  #Skills ul {
+    flex-wrap: wrap;
+  }
   #leave-message input,
   #leave-message textarea {
     max-width: 100%;
@@ -165,6 +176,14 @@ section {
     max-width: 200px;
     padding: 12px;
   }
+
+  #projects ul {
+    flex-direction: column;
+  }
+}
+
+#messages h2 {
+  margin-left: 25px;
 }
 
 #messages li {
@@ -190,4 +209,29 @@ section {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+#projects h2 {
+  margin-left: 25px;
+}
+
+#projects ul {
+  display: flex;
+  list-style: none;
+  gap : 15px;
+  flex-wrap: wrap;
+}
+#projects li {
+  border: 1px solid #b7c9c2;
+  background-color: #e8f0ed;
+  padding: 10px 15px;
+  border-radius: 8px; 
+}
+#projects a {
+  color: #2f3e46;
+  text-decoration: none;
+  font-weight: 600;
+}
+#projects a:hover {
+  color: #52796f;
 }
