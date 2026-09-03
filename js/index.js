@@ -68,6 +68,14 @@ fetch("https://api.github.com/users/soniasamani/repos")
   .then(data => {
       const repositories = data;
       console.log(repositories);
+
+      if (repositories.length === 0) {
+        const projectSection = document.querySelector("#projects");
+        const message = document.createElement("p");
+        message.innerText = "No projects available.";
+        projectSection.appendChild(message);
+        return;
+      }
       const projectSection = document.querySelector("#projects");
       const projectList = projectSection.querySelector("ul");
       for (let i = 0; i < repositories.length; i++) {
@@ -84,7 +92,14 @@ fetch("https://api.github.com/users/soniasamani/repos")
       }
   })
   .catch(error => {
-      console.error(error);
+    console.error(error);
+  
+    const projectSection = document.querySelector("#projects");
+    const message = document.createElement("p");
+  
+    message.innerText = "Unable to load projects.";
+  
+    projectSection.appendChild(message);
   });
 
 
