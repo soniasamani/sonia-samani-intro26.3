@@ -61,6 +61,48 @@ messageForm.addEventListener("submit", function(e) {
   e.target.reset();
 });
 
+fetch("https://api.github.com/users/soniasamani/repos")
+  .then(response => {
+     return response.json();
+  })
+  .then(data => {
+      const repositories = data;
+      console.log(repositories);
+
+      if (repositories.length === 0) {
+        const projectSection = document.querySelector("#projects");
+        const message = document.createElement("p");
+        message.innerText = "No projects available.";
+        projectSection.appendChild(message);
+        return;
+      }
+      const projectSection = document.querySelector("#projects");
+      const projectList = projectSection.querySelector("ul");
+      for (let i = 0; i < repositories.length; i++) {
+        const project = document.createElement("li");
+      
+        const projectLink = document.createElement("a");
+        projectLink.innerText = repositories[i].name;
+        projectLink.href = repositories[i].html_url;
+        projectLink.target = "_blank";
+      
+        project.appendChild(projectLink);
+      
+        projectList.appendChild(project);
+      }
+  })
+  .catch(error => {
+    console.error(error);
+  
+    const projectSection = document.querySelector("#projects");
+    const message = document.createElement("p");
+  
+    message.innerText = "Unable to load projects.";
+  
+    projectSection.appendChild(message);
+  });
+
+
 
 
 
