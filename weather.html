@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="css/weather.css">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">Portfolio</a>
+        <a href="#temperature" id="temperature-link">Temperature</a>
+        <a href="#conditions" id="conditions-link">Conditions</a>
+      </nav>
+  <h1>Weather App</h1>
+  <h2 id="location-name"></h2>
+  <form id="city-form">
+    <label for="city">Enter a city:</label>
+    <input type="text" id="city" name="city" required>
+    <button type="submit">Search</button>
+  </form>
+
+  <p class="current-weather-label">Current Weather</p>
+
+  <section id="temperature">
+    <h2>Temperature</h2>
+    <p>Temperature data will appear here.</p>
+  </section>
+  
+  <section id="conditions">
+    <h2>Conditions</h2>
+    <p>Weather condition data will appear here.</p>
+  </section>
+  <script src="js/weather.js"></script>
+</body>
+</html>
