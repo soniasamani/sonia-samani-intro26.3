@@ -1,3 +1,4 @@
+/* General Styles */
 body{
   background-color:#f8f9fa;
   color: #2f3e46;
@@ -29,7 +30,7 @@ section {
   #Connect li {
     margin-bottom: 23px;
   }
- 
+ /* Navigation */
   nav{
       position:sticky;
       top:0;
@@ -50,7 +51,8 @@ section {
   nav a:hover {
     background-color: #354f52;
   }
- 
+
+ /* Experience Section */
   .experience-header{
     display: flex;
     align-items: center;
@@ -72,9 +74,13 @@ section {
     font-size: 14px;
   }
   #Experience{
-      margin: 0 30px;
+    margin: 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
 
+  /* Connect Section */
   #Connect ul {
     display: flex;
     list-style-type: none;
@@ -98,6 +104,7 @@ section {
     color: white;
   }
 
+  /* Skills Section */
   #Skills h2 {
     margin-left: 25px;
   }
@@ -112,6 +119,7 @@ section {
     border-radius: 10px;
   }
 
+  /* Leave a Message Section */
   #leave-message form {
     display: flex;
     flex-direction: column;
@@ -157,6 +165,8 @@ section {
 #leave-message button:hover {
   opacity: 0.85;
 }
+
+/* Responsive Styles */
 @media (max-width: 600px) {
   nav {
     flex-wrap: wrap;
@@ -182,6 +192,7 @@ section {
   }
 }
 
+/* Messages Section */
 #messages h2 {
   margin-left: 25px;
 }
@@ -215,6 +226,7 @@ section {
   margin-left: 25px;
 }
 
+/* Projects Section */
 #projects ul {
   display: flex;
   list-style: none;
@@ -234,4 +246,11 @@ section {
 }
 #projects a:hover {
   color: #52796f;
+}
+
+#messages ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 0;
 }

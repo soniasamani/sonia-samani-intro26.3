@@ -1,3 +1,4 @@
+// Footer
 const body = document.body;
 const footerElement = document.createElement("footer");
 body.appendChild(footerElement);
@@ -10,6 +11,7 @@ const copyright = document.createElement("p");
 copyright.innerHTML = `\u00A9 ${thisYear} Sonia Samani`;
 footer.appendChild(copyright); 
 
+// Skills
 const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub", "Java", "SQL", "WordPress"];
 const skillsSection = document.querySelector("#Skills"); 
 const skillsList = skillsSection.querySelector("ul");
@@ -20,6 +22,7 @@ for (let i = 0; i < skills.length; i++) {
     skillsList.appendChild(skill);
 }
 
+// Leave a Message
 let messageForm = document.querySelector('[name="leave_message"]');
 let messageSection = document.querySelector("#messages");
 let messageList = messageSection.querySelector("ul");
@@ -61,6 +64,7 @@ messageForm.addEventListener("submit", function(e) {
   e.target.reset();
 });
 
+// Projects - GitHub API
 fetch("https://api.github.com/users/soniasamani/repos")
   .then(response => {
      return response.json();
