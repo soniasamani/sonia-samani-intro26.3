@@ -7,6 +7,8 @@ const conditionsSection = document.querySelector("#conditions");
 const temperatureLink = document.querySelector("#temperature-link");
 const conditionsLink = document.querySelector("#conditions-link");
 const locationName = document.querySelector("#location-name");
+const currentTemp = document.querySelector("#current-temp");
+const feelsLike = document.querySelector("#feels-like");
 
 function getWeatherDescription(code) {
   if (code === 0) {
@@ -17,22 +19,28 @@ function getWeatherDescription(code) {
     return "Partly cloudy";
   } else if (code === 3) {
     return "Overcast";
-  } else if (code === 45) {
+  } else if (code === 45 || code === 48) {
     return "Fog";
-  } else if (code === 51) {
-    return "Light drizzle";
-  } else if (code === 61) {
-    return "Light rain";
-  } else if (code === 63) {
-    return "Moderate rain";
-  } else if (code === 65) {
-    return "Heavy rain";
-  } else if (code === 71) {
-    return "Light snow";
-  } else if (code === 80) {
+  } else if (code === 51 || code === 53 || code === 55) {
+    return "Drizzle";
+  } else if (code === 56 || code === 57) {
+    return "Freezing drizzle";
+  } else if (code === 61 || code === 63 || code === 65) {
+    return "Rain";
+  } else if (code === 66 || code === 67) {
+    return "Freezing rain";
+  } else if (code === 71 || code === 73 || code === 75) {
+    return "Snow";
+  } else if (code === 77) {
+    return "Snow grains";
+  } else if (code === 80 || code === 81 || code === 82) {
     return "Rain showers";
+  } else if (code === 85 || code === 86) {
+    return "Snow showers";
   } else if (code === 95) {
     return "Thunderstorm";
+  } else if (code === 96 || code === 99) {
+    return "Thunderstorm with hail";
   } else {
     return "Unknown conditions";
   }
@@ -61,12 +69,18 @@ function getWeatherIcon(code) {
 cityForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const city = cityInput.value;
+  const city = cityInput.value.trim();
   const geocodingUrl =
-  `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`;
+  `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`;
 
   fetch(geocodingUrl)
-    .then((response) => response.json())
+    .then((response) => {
+    if (!response.ok) {
+      throw new Error("Unable to get city data.");
+    }
+
+    return response.json();
+    })
     .then((data) => {
       if (!data.results || data.results.length === 0) {
         alert("City not found. Please try again.");
@@ -74,9 +88,7 @@ cityForm.addEventListener("submit", (event) => {
       }
        latitude = data.results[0].latitude;
        longitude = data.results[0].longitude;
-       locationName.textContent = data.results[0].name;
-       console.log(latitude);
-       console.log(longitude);     
+       locationName.textContent = data.results[0].name;     
     })
     .catch((error) => {
       console.error(error);
@@ -86,7 +98,7 @@ cityForm.addEventListener("submit", (event) => {
 
 temperatureLink.addEventListener("click", (event) => {
   event.preventDefault();
-  if (!latitude || !longitude) {
+  if (latitude == null || longitude == null) {
     alert("Please search for a city first.");
     return;
   }
@@ -95,15 +107,17 @@ temperatureLink.addEventListener("click", (event) => {
     `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature&temperature_unit=fahrenheit`;
 
   fetch(temperatureUrl)
-    .then((response) => response.json())
+    .then((response) => {
+    if (!response.ok) {
+      throw new Error("Unable to get temperature data.");
+    }
+
+    return response.json();
+    })
     .then((temperatureData) => {
-      temperatureSection.innerHTML = `
-        <h2>Temperature</h2>
-        <p class="current-temp">${temperatureData.current.temperature_2m}°F</p>
-        <p class="feels-like">
-          Feels like ${temperatureData.current.apparent_temperature}°F
-        </p>
-    `;
+      currentTemp.textContent = `${temperatureData.current.temperature_2m}°F`;
+
+      feelsLike.textContent = `Feels like ${temperatureData.current.apparent_temperature}°F`;
     })
     .catch((error) => {
       console.error(error);
@@ -113,7 +127,7 @@ temperatureLink.addEventListener("click", (event) => {
 
 conditionsLink.addEventListener("click", (event) => {
   event.preventDefault();
-  if (!latitude || !longitude) {
+  if (latitude == null || longitude == null) {
     alert("Please search for a city first.");
     return;
   }
@@ -121,7 +135,13 @@ conditionsLink.addEventListener("click", (event) => {
     `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=weather_code,relative_humidity_2m,wind_speed_10m&wind_speed_unit=mph`;
 
   fetch(conditionsUrl)
-    .then((response) => response.json())
+    .then((response) => {
+    if (!response.ok) {
+      throw new Error("Unable to get temperature data.");
+    }
+
+    return response.json();
+    })
     .then((conditionsData) => {
       const description =
         getWeatherDescription(conditionsData.current.weather_code);
